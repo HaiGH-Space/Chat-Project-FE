@@ -4,7 +4,13 @@ import {Provider} from "@auth/core/providers";
 import {login, refreshToken} from "@/lib/api/auth";
 import {jwtDecode} from "jwt-decode";
 import {JWT} from "@auth/core/jwt";
-
+type JwtPayload = {
+    id: string;
+    name: string;
+    email: string;
+    avatarUrl: string;
+    exp: number;
+};
 const providers: Provider[] = [
     Credentials({
         credentials: {
@@ -26,7 +32,7 @@ const providers: Provider[] = [
                 }
                 const loginResponse = res.data;
                 const token = loginResponse.accessToken
-                const decoded = jwtDecode<Record<string, any>>(token);
+                const decoded = jwtDecode<JwtPayload>(token);
                 console.log(decoded)
                 return {
                     id: decoded['id'],
