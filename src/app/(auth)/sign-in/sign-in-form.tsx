@@ -44,11 +44,10 @@ export default function SignInForm() {
                     window.location.href = '/dashboard'
                 }
             } else {
-                form.setError("root", {type: "manual", message: "Login failed. Please try again."})
+                toast.error( "Login failed. Please try again.");
             }
         } catch (error) {
-            console.error("Login error:", error);
-            form.setError("root", {type: "manual", message: "An unexpected error occurred. Please try again."});
+            toast.error( error as string);
         }
     }
 

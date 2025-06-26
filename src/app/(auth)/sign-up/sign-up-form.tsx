@@ -46,12 +46,12 @@ export default function SignUpForm() {
                 toast.success("Signed up successfully");
                 window.location.href = '/sign-in'
             } else {
-                toast.error(response.message);
+                toast.error(response.message || "Something went wrong");
             }
         } catch (error) {
             toast.error(error as string);
         }
-        // setIsLoading(false)
+        setIsLoading(false)
     }
     return (
         <div className={"flex flex-col gap-6"}>
