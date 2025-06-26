@@ -1,9 +1,9 @@
 import NextAuth from "next-auth"
-import Credentials from "@auth/core/providers/credentials";
 import {Provider} from "@auth/core/providers";
 import {login, refreshToken} from "@/lib/api/auth";
 import {jwtDecode} from "jwt-decode";
 import {JWT} from "@auth/core/jwt";
+import Credentials from "@auth/core/providers/credentials";
 type JwtPayload = {
     id: string;
     name: string;
