@@ -1,7 +1,7 @@
 'use server'
 
-import {SignInForm} from "@/app/(auth)/sign-in/sign-in-form";
 import {GalleryVerticalEnd} from "lucide-react";
+import SignInForm from "@/app/(auth)/sign-in/sign-in-form";
 
 export default async function SignInPage() {
   return (
