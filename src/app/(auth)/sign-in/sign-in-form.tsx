@@ -9,6 +9,8 @@ import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {signInWithCredentials} from "@/lib/api/auth";
+import {CustomAuthError} from "@/auth";
+import {AuthError} from "next-auth";
 
 const signInDefaultValues =
     process.env.NODE_ENV === 'development'
@@ -47,7 +49,9 @@ export default function SignInForm() {
                 toast.error( "Login failed. Please try again.");
             }
         } catch (error) {
-            toast.error( error as string);
+            if (error instanceof Error) {
+                toast.error(error.message);
+            }
         }
     }
 

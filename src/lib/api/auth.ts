@@ -1,8 +1,9 @@
+'use server'
 import {callApiToObject} from "@/lib/utils";
 import {POST_METHOD} from "@/lib/constants";
 import {LoginRequest, RefreshTokenRequest, RegisterRequest} from "@/lib/interface/request/auth";
 import {LoginResponse} from "@/lib/interface/response/auth";
-import {signIn} from "next-auth/react";
+import {signIn} from "@/auth";
 
 const subPath = '/public/auth'
 

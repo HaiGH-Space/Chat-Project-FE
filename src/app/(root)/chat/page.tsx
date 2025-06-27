@@ -12,7 +12,7 @@ export default async function ChatPage() {
     ) : (
         <div className={"flex flex-col flex-1 items-center justify-center gap-4"}>
             <AuroraText className="text-6xl font-bold">Welcome to Explore Chat App!</AuroraText>
-            <Link href='/sign-in' ><FlipText>Please log in to start chatting.</FlipText></Link>
+            <Link href='/sign-in' ><FlipText className={'font-bold -tracking-widest'}>Please log in to start chatting.</FlipText></Link>
         </div>
     )
 }
