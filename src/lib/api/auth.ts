@@ -1,8 +1,9 @@
+'use server'
 import {callApiToObject} from "@/lib/utils";
 import {POST_METHOD} from "@/lib/constants";
-import {LoginRequest, RegisterRequest} from "@/lib/interface/request/auth";
+import {LoginRequest, RefreshTokenRequest, RegisterRequest} from "@/lib/interface/request/auth";
 import {LoginResponse} from "@/lib/interface/response/auth";
-import {signIn} from "next-auth/react";
+import {signIn} from "@/auth";
 
 const subPath = '/public/auth'
 
@@ -32,13 +33,13 @@ export async function login(data: LoginRequest) {
     })
 }
 
-export async function refreshToken(token: string) {
+export async function refreshToken(data: RefreshTokenRequest) {
     return callApiToObject<LoginResponse>({
-        url: `${subPath}/refresh`,
+        url: `${subPath}/refresh-token`,
         method: POST_METHOD,
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
+        },
+        body: data
     })
 }

@@ -33,23 +33,20 @@ export default function SignUpForm() {
     const onSubmit = async (data: signUpType) => {
         setIsLoading(true);
         const {email, username, password, confirmPassword, fullName, phone} = data;
-        try {
-            const response = await signUpWithCredentials({
-                confirmPassword: confirmPassword,
-                email: email,
-                fullName: fullName,
-                password: password,
-                phoneNumber: !phone || phone.length === 0 ? null : phone,
-                username: username
-            })
-            if (response.success) {
-                toast.success("Signed up successfully");
-                window.location.href = '/sign-in'
-            } else {
-                toast.error(response.message || "Something went wrong");
-            }
-        } catch (error) {
-            toast.error(error as string);
+
+        const response = await signUpWithCredentials({
+            confirmPassword: confirmPassword,
+            email: email,
+            fullName: fullName,
+            password: password,
+            phoneNumber: !phone || phone.length === 0 ? null : phone,
+            username: username
+        })
+        if (response.success) {
+            toast.success("Signed up successfully");
+            window.location.href = '/sign-in'
+        } else {
+            toast.error(response.message || "Something went wrong");
         }
         setIsLoading(false)
     }
@@ -157,7 +154,8 @@ export default function SignUpForm() {
                                     <Button type="submit" disabled={isLoading}>
                                         {isLoading ? (
                                             <span className="flex items-center gap-2">
-                                                <Lottie animationData={loadingAnimation} loop={true} className="h-7 w-7"/>
+                                                <Lottie animationData={loadingAnimation} loop={true}
+                                                        className="h-7 w-7"/>
                                                      Sign up...
                                             </span>
                                         ) : (

@@ -41,13 +41,15 @@ export default function SignInForm() {
                     toast.error(response.error)
                 } else {
                     toast.success("Login successful!")
-                    window.location.href = '/dashboard'
+                    window.location.href = '/chat'
                 }
             } else {
                 toast.error( "Login failed. Please try again.");
             }
         } catch (error) {
-            toast.error( error as string);
+            if (error instanceof Error) {
+                toast.error(error.message);
+            }
         }
     }
 
