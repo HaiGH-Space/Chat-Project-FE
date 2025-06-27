@@ -1,13 +1,13 @@
 import  { DefaultUser } from "next-auth";
 declare module "next-auth" {
     interface Session {
-        accessToken?: string;
-        refreshToken?: string;
+        accessToken: string;
+        refreshToken: string;
         user: {
-            id?: string;
-            name?: string | null;
-            email?: string | null;
-            image?: string | null;
+            id: string;
+            name: string;
+            email: string;
+            image: string;
         };
         error?: string;
     }
@@ -16,9 +16,9 @@ declare module "next-auth" {
         accessToken?: string;
         refreshToken?: string;
         id?: string;
-        name?: string | null;
-        email?: string | null;
-        image?: string | null;
+        name: string;
+        email: string;
+        image: string;
         exp?: number;
     }
 }

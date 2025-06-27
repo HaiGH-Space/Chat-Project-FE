@@ -35,10 +35,10 @@ const providers: Provider[] = [
                 const decoded = jwtDecode<JwtPayload>(token);
                 console.log(decoded)
                 return {
-                    id: decoded['id'],
-                    name: decoded['name'],
-                    email: decoded['email'],
-                    image:decoded['avatarUrl'],
+                    id: decoded.id,
+                    name: decoded.name,
+                    email: decoded.email,
+                    image:decoded.avatarUrl,
                     accessToken: loginResponse.accessToken,
                     refreshToken: loginResponse.refreshToken,
                     exp: decoded['exp'] * 1000,
@@ -73,8 +73,8 @@ export const { handlers ,signIn, signOut, auth } = NextAuth({
         async session({ session, token }) {
             return {
                 ...session,
-                accessToken: typeof token.accessToken === "string" ? token.accessToken : undefined,
-                refreshToken: typeof token.refreshToken === "string" ? token.refreshToken : undefined,
+                accessToken:token.accessToken??'',
+                refreshToken: token.refreshToken??'',
                 error: typeof token.error === "string" ? token.error : undefined,
                 user: {
                     id: typeof token.id === "string" ? token.id : undefined,
@@ -87,16 +87,19 @@ export const { handlers ,signIn, signOut, auth } = NextAuth({
     }
 })
 async function refreshTokens(token: JWT) {
-    const response = await refreshToken(token.refreshToken as string);
+    const response = await refreshToken({refreshToken: token.refreshToken as string});
     if (!response.success) {
-        return {
-            ...token,
-            error: response.message,
-        }
+        return null
     }
     const data = response.data;
+    const decoded = jwtDecode<JwtPayload>(data.accessToken);
     return {
         ...token,
+        id: decoded.id,
+        name: decoded.name,
+        email: decoded.email,
+        image: decoded.avatarUrl,
+        exp: decoded.exp * 1000,
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
     }

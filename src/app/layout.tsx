@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import "./globals.css";
 import {ThemeProvider} from "@/components/theme-provider";
 import {Toaster} from "@/components/ui/sonner";
+import Template from "@/app/template";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -15,14 +16,18 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body>
+        <body className="min-h-screen">
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
         >
-            <main>{children}</main>
+            <main className="min-h-screen flex flex-col">
+                <Template>
+                    {children}
+                </Template>
+            </main>
             <Toaster />
         </ThemeProvider>
         </body>

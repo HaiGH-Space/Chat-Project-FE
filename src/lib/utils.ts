@@ -19,11 +19,11 @@ export async function callApiToObject<T>({url, method, body, headers}: ApiCallOp
       if (body) {
         options.body = JSON.stringify(body);
       }
+      console.log(`${HOST_API}${url}`)
       const response = await fetch(`${HOST_API}${url}`, options);
       return await response.json();
-
     }catch(error) {
-      console.error(error);
+      // console.error(error);
       return {
         success: false,
         message: "An error occurred while calling the API.",

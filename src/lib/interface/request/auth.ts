@@ -2,7 +2,9 @@ export interface LoginRequest {
     usernameOrEmail: string;
     password: string;
 }
-
+export interface RefreshTokenRequest {
+    refreshToken: string;
+}
 export interface RegisterRequest {
     fullName: string;
     username: string,
