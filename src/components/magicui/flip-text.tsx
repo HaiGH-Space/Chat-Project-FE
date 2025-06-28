@@ -42,7 +42,7 @@ export function FlipText({
   const characters = React.Children.toArray(children).join("").split("");
 
   return (
-    <div className="flex justify-center space-x-2">
+      <div className="text-center text-xl md:text-2xl break-words md:flex md:justify-center md:space-x-2 md:text-left md:break-normal">
       <AnimatePresence >
         {characters.map((char, i) => (
           <MotionComponent
