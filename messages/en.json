@@ -1,0 +1,17 @@
+{
+  "Language": {
+    "title": "Language",
+    "en": "English",
+    "zh": "Chinese"
+  },
+  "ChatPage": {
+    "title": "Chat",
+    "welcomeMessage": "Welcome , {username}!"
+  },
+  "AboutPage": {
+    "welcomeMessage": "Welcome to Explore Chat App!"
+  },
+  "Reminder": {
+    "Login": "Please log in to start chatting."
+  }
+}

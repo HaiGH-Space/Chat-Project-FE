@@ -9,6 +9,7 @@ import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {signInWithCredentials} from "@/lib/api/auth";
+import Link from "next/link";
 
 const signInDefaultValues =
     process.env.NODE_ENV === 'development'
@@ -101,9 +102,9 @@ export default function SignInForm() {
                                 </div>
                                 <div className="text-center text-sm">
                                     Don&apos;t have an account?{" "}
-                                    <a href="/sign-up" className="underline underline-offset-4">
+                                    <Link href="/sign-up" className="underline underline-offset-4">
                                         Sign up
-                                    </a>
+                                    </Link>
                                 </div>
                             </form>
                             <div

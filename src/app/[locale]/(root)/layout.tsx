@@ -1,4 +1,4 @@
-import HomeHeader from "@/components/shared/header/HomeHeader";
+import HomeHeader from "@/components/shared/header/home-header";
 
 export default async function RootLayout({
                                              children,

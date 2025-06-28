@@ -1,0 +1,17 @@
+{
+  "Language": {
+    "title": "Ngôn ngữ",
+    "en": "Tiếng Anh",
+    "zh": "Tiếng Trung"
+  },
+  "ChatPage": {
+    "title": "Nhắn tin",
+    "welcomeMessage": "Chào mừng , {username}!"
+  },
+  "AboutPage": {
+    "welcomeMessage": "Chào mừng đến với ứng dụng Explore Chat!"
+  },
+  "Reminder": {
+    "Login": "Vui lòng đăng nhập để bắt đầu trò chuyện."
+  }
+}
