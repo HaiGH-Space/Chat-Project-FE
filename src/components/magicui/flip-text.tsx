@@ -43,7 +43,7 @@ export function FlipText({
 
   return (
     <div className="flex justify-center space-x-2">
-      <AnimatePresence mode="wait">
+      <AnimatePresence >
         {characters.map((char, i) => (
           <MotionComponent
             key={i}

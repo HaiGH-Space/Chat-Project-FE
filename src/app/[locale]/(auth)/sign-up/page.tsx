@@ -1,5 +1,5 @@
 import {GalleryVerticalEnd} from "lucide-react";
-import SignUpForm from "@/app/(auth)/sign-up/sign-up-form";
+import SignUpForm from "@/app/[locale]/(auth)/sign-up/sign-up-form";
 
 export default async function SignUpPage(){
     return (
