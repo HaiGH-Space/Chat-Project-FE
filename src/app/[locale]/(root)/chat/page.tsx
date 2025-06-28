@@ -12,8 +12,8 @@ export default async function ChatPage() {
             <p>{t('ChatPage.welcomeMessage',{username: session.user.name})}</p>
         </div>
     ) : (
-        <div className={"flex flex-col flex-1 items-center justify-center gap-4"}>
-            <AuroraText className="text-6xl font-bold">{t('AboutPage.welcomeMessage')}</AuroraText>
+        <div className={"flex flex-col flex-1 break-words items-center justify-center gap-4"}>
+            <AuroraText className="text-center text-4xl md:text-6xl font-bold">{t('AboutPage.welcomeMessage')}</AuroraText>
             <Link href='/sign-in' ><FlipText className={'font-bold -tracking-widest'}>{t('Reminder.Login')}</FlipText></Link>
         </div>
     )
