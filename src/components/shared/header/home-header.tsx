@@ -1,9 +1,10 @@
 'use server'
 import {auth} from "@/auth";
-import {ToggleThemeMode} from "@/components/shared/header/ToggleThemeMode";
-import AvatarHeader from "@/components/shared/header/AvatarHeader";
+import {TogglThemeMode} from "@/components/shared/header/toggl-theme-mode";
+import AvatarHeader from "@/components/shared/header/avatar-header";
 import {Button} from "@/components/ui/button";
 import Link from "next/link"
+import LanguageSwitcher from "@/components/shared/header/language-switcher";
 
 export default async function HomeHeader() {
     const session = await auth();
@@ -13,7 +14,8 @@ export default async function HomeHeader() {
                 <h1 className='text-2xl font-bold'>Explore chat</h1>
             </Link>
             <div className='flex items-center gap-4'>
-                <ToggleThemeMode/>
+                <LanguageSwitcher/>
+                <TogglThemeMode/>
                 {session ?
                     <AvatarHeader alt={session.user.name} src={session.user.image}/>
                 :

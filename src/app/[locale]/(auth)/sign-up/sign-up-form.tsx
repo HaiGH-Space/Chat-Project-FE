@@ -12,6 +12,7 @@ import {toast} from "sonner";
 import {useState} from "react";
 import Lottie from "lottie-react";
 import loadingAnimation from "@/assets/loading.json";
+import Link from "next/link";
 
 const signUpDefaultValues = {
     email: '',
@@ -167,9 +168,9 @@ export default function SignUpForm() {
                             </form>
                             <div className="text-center text-sm">
                                 Do you have an account?{" "}
-                                <a href="/sign-in" className="underline underline-offset-4">
+                                <Link href="/sign-in" className="underline underline-offset-4">
                                     Sign in
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </Form>

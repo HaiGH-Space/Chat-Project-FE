@@ -1,4 +1,9 @@
 {
+  "Language": {
+    "title": "Language",
+    "en": "English",
+    "zh": "Chinese"
+  },
   "ChatPage": {
     "title": "Chat",
     "welcomeMessage": "Welcome , {username}!"

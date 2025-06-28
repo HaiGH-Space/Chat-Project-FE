@@ -1,12 +1,12 @@
 import type {Metadata} from "next";
 import "../globals.css";
 import {ThemeProvider} from "@/components/theme-provider";
-import {Toaster} from "@/components/ui/sonner";
-import Template from "@/app/template";
 import {NextIntlClientProvider} from 'next-intl';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import {getMessages} from "next-intl/server";
+import Template from "@/components/shared/template";
+import {Toaster} from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -14,20 +14,20 @@ export const metadata: Metadata = {
 };
 
 export default async function LocaleLayout({
+                                               params,
                                                children,
-                                               params
                                            }: {
-    children: React.ReactNode;
-    params: Promise<{ locale: string }>;
+    params: { locale: string }
+    children: React.ReactNode
 }) {
     const {locale} = await params
-    if (!routing.locales.includes(locale as any)) {
+    if (!routing.locales.includes(locale)) {
         notFound()
     }
     const messages = await getMessages()
     return (
         <html lang={locale} suppressHydrationWarning>
-        <body className="min-h-screen">
+        <body className="min-h-screen antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
             <ThemeProvider
                 attribute="class"
@@ -35,11 +35,9 @@ export default async function LocaleLayout({
                 enableSystem
                 disableTransitionOnChange
             >
-                <main className="min-h-screen flex flex-col">
-                    <Template>
-                        {children}
-                    </Template>
-                </main>
+                <Template>
+                    {children}
+                </Template>
                 <Toaster/>
             </ThemeProvider>
         </NextIntlClientProvider>

@@ -1,11 +1,11 @@
 'use server'
-import {ToggleThemeMode} from "@/components/shared/header/ToggleThemeMode";
+import {TogglThemeMode} from "@/components/shared/header/toggl-theme-mode";
 import {Button} from "@/components/ui/button";
 
 export default async function HomePage() {
     return (
         <>
-            <ToggleThemeMode/>
+            <TogglThemeMode/>
             <Button>
                 Hello, World!
             </Button>
