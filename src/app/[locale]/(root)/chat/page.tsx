@@ -1,20 +1,17 @@
 import {auth} from "@/auth";
-import { AuroraText } from "@/components/magicui/aurora-text";
-import { FlipText } from "@/components/magicui/flip-text";
-import Link from "next/link";
+
 import {getTranslations} from "next-intl/server";
+import {redirect} from "next/navigation";
 export default async function ChatPage() {
     const session = await auth()
+    if (!session) {
+        redirect('/sign-in?callbackUrl=/chat')
+    }
     const t = await getTranslations()
-    return session? (
+    return  (
         <div>
             <h1>{t('ChatPage.title')}</h1>
             <p>{t('ChatPage.welcomeMessage',{username: session.user.name})}</p>
-        </div>
-    ) : (
-        <div className={"flex flex-col flex-1 break-words items-center justify-center gap-4"}>
-            <AuroraText className="text-center text-4xl md:text-6xl font-bold">{t('AboutPage.welcomeMessage')}</AuroraText>
-            <Link href='/sign-in' ><FlipText className={'font-bold -tracking-widest'}>{t('Reminder.Login')}</FlipText></Link>
         </div>
     )
 }

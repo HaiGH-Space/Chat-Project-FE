@@ -4,6 +4,10 @@
     "en": "English",
     "zh": "Chinese"
   },
+  "HomePage": {
+    "title": "Home",
+    "goToChatPage": "Go to Chat Page"
+  },
   "ChatPage": {
     "title": "Chat",
     "welcomeMessage": "Welcome , {username}!"

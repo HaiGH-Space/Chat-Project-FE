@@ -10,6 +10,7 @@ import {Input} from "@/components/ui/input";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {signInWithCredentials} from "@/lib/api/auth";
 import Link from "next/link";
+import {useRouter, useSearchParams} from "next/navigation";
 
 const signInDefaultValues =
     process.env.NODE_ENV === 'development'
@@ -32,7 +33,9 @@ export default function SignInForm() {
         mode: "onChange",
         defaultValues: signInDefaultValues,
     })
-
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get('callbackUrl') || '/chat'
     const onSubmit = async (data: signInType) => {
         const {email, password} = data;
         try {
@@ -42,7 +45,7 @@ export default function SignInForm() {
                     toast.error(response.error)
                 } else {
                     toast.success("Login successful!")
-                    window.location.href = '/chat'
+                    router.push(callbackUrl);
                 }
             } else {
                 toast.error( "Login failed. Please try again.");
