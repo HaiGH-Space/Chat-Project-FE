@@ -1,6 +1,6 @@
 'use server'
 import {auth} from "@/auth";
-import {TogglThemeMode} from "@/components/shared/header/toggl-theme-mode";
+import {ToggleThemeMode} from "@/components/shared/header/toggle-theme-mode";
 import AvatarHeader from "@/components/shared/header/avatar-header";
 import {Button} from "@/components/ui/button";
 import Link from "next/link"
@@ -15,7 +15,7 @@ export default async function HomeHeader() {
             </Link>
             <div className='flex flex-wrap sm:flex-nowrap items-center gap-4'>
                 <LanguageSwitcher/>
-                <TogglThemeMode/>
+                <ToggleThemeMode/>
                 {session ?
                     <AvatarHeader alt={session.user.name} src={session.user.image}/>
                 :

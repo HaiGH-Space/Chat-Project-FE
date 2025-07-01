@@ -10,7 +10,8 @@
   },
   "ChatPage": {
     "title": "Nhắn tin",
-    "welcomeMessage": "Chào mừng , {username}!"
+    "welcomeMessage": "Chào mừng , {username}!",
+    "typeMessage": "Nhập tin nhắn của bạn ở đây..."
   },
   "AboutPage": {
     "welcomeMessage": "Chào mừng đến với ứng dụng Explore Chat!"

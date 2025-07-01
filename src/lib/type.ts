@@ -20,3 +20,7 @@ export type APIResponseError = {
 export type APIResponse<T> = APIResponseSuccess<T> | APIResponseError;
 export type SignInFormType = z.infer<ReturnType<typeof SignInFormValidator>>;
 export type SignUpFormType = z.infer<ReturnType<typeof SignUpFormValidator>>;
+export type BreadcrumbItemType = {
+    title: string;
+    href?: string;
+}

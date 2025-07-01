@@ -10,6 +10,7 @@
   },
   "ChatPage": {
     "title": "Chat",
+    "typeMessage": "Type your message here...",
     "welcomeMessage": "Welcome , {username}!"
   },
   "AboutPage": {
