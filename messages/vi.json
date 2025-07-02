@@ -9,6 +9,7 @@
     "goToChatPage": "Đi đến trang trò chuyện"
   },
   "ChatPage": {
+    "defaultRoomName": "Không rõ",
     "title": "Nhắn tin",
     "welcomeMessage": "Chào mừng , {username}!",
     "typeMessage": "Nhập tin nhắn của bạn ở đây..."
@@ -18,5 +19,8 @@
   },
   "Reminder": {
     "Login": "Vui lòng đăng nhập để bắt đầu trò chuyện."
+  },
+  "Error": {
+    "unauthorized": "Bạn không có quyền truy cập."
   }
 }

@@ -9,6 +9,7 @@
     "goToChatPage": "Go to Chat Page"
   },
   "ChatPage": {
+    "defaultRoomName": "Unknown Room",
     "title": "Chat",
     "typeMessage": "Type your message here...",
     "welcomeMessage": "Welcome , {username}!"
@@ -18,5 +19,8 @@
   },
   "Reminder": {
     "Login": "Please log in to start chatting."
+  },
+  "Error": {
+    "unauthorized": "Unauthorized access, please log in."
   }
 }
