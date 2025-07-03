@@ -23,7 +23,6 @@ import {useLocale} from "use-intl";
 import AvatarHeader from "@/components/shared/header/avatar-header";
 import {ArrayWithPage, BreadcrumbItemType} from "@/lib/type";
 import {useTranslations} from "next-intl";
-import ChatListPagination from "@/app/[locale]/(root)/chat/components/chat-list-pagination";
 
 const data = {
     user: {
@@ -50,20 +49,17 @@ const data = {
 
 export function AppSidebar({
                                rooms_with_page_init,
-                               onRoomSelect,
-                               onPathBreadCumbs,
+                               onRoomSelectAction,
+                               onPathBreadCumbsAction,
                                room_selected,
-                               page,
-                               setPage,
                                ...sidebarProps // chỉ chứa các prop của Sidebar
                            }: React.ComponentProps<typeof Sidebar> & {
     rooms_with_page_init: ArrayWithPage<Room>,
-    onRoomSelect: (room: Room) => void,
-    onPathBreadCumbs: (breadcrumbItemTypes: BreadcrumbItemType[]) => void,
+    onRoomSelectAction: (room: Room) => void,
+    onPathBreadCumbsAction: (breadcrumbItemTypes: BreadcrumbItemType[]) => void,
     room_selected?: Room,
-    page: number,
-    setPage: (page: number) => void,
 }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [roomsWithPage, setRoomsWithPage] = useState<ArrayWithPage<Room>>(rooms_with_page_init)
     const [activeItem, setActiveItem] = useState(data.navMain[0])
     const {setOpen} = useSidebar()
@@ -140,8 +136,8 @@ export function AppSidebar({
                     <ListNavRoom
                         rooms={roomsWithPage.content}
                         locale={locale}
-                        onRoomSelect={onRoomSelect}
-                        onPathBreadCumbs={onPathBreadCumbs}
+                        onRoomSelectAction={onRoomSelectAction}
+                        onPathBreadCumbsAction={onPathBreadCumbsAction}
                         roomSelected={room_selected}
                     />
                 ) : null}
@@ -153,14 +149,14 @@ export function AppSidebar({
 export function ListNavRoom({
                                 rooms,
                                 locale,
-                                onRoomSelect,
-                                onPathBreadCumbs,
+                                onRoomSelectAction,
+                                onPathBreadCumbsAction,
                                 roomSelected,
                             }: {
     rooms: Room[],
     locale: string,
-    onRoomSelect: (room: Room) => void,
-    onPathBreadCumbs: (breadCumbs: BreadcrumbItemType[]) => void,
+    onRoomSelectAction: (room: Room) => void,
+    onPathBreadCumbsAction: (breadCumbs: BreadcrumbItemType[]) => void,
     roomSelected?: Room
 }) {
     const t = useTranslations()
@@ -179,8 +175,8 @@ export function ListNavRoom({
                         <div
                             onClick={
                                 () => {
-                                    onRoomSelect(room)
-                                    onPathBreadCumbs(
+                                    onRoomSelectAction(room)
+                                    onPathBreadCumbsAction(
                                         [...pathBreadcrumbs, {
                                             title: room.name,
                                             href: `/chat?roomId=${room.id}`,

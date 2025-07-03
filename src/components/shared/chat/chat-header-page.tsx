@@ -13,10 +13,10 @@ import {Fragment} from "react";
 
 export function ChatHeaderPage({
                                    pathBreadcrumbs,
-                                   onBackToSelectRoom
+                                   onBackToSelectRoomAction
                                }: {
     pathBreadcrumbs?: BreadcrumbItemType[],
-    onBackToSelectRoom: () => void
+    onBackToSelectRoomAction: () => void
 }) {
     return (
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
@@ -32,7 +32,7 @@ export function ChatHeaderPage({
                             <Fragment key={index}>
                                 <BreadcrumbItem>
                                     {index === 0 ?
-                                        (<BreadcrumbLink className={'cursor-pointer'} onClick={onBackToSelectRoom}>
+                                        (<BreadcrumbLink className={'cursor-pointer'} onClick={onBackToSelectRoomAction}>
                                             {item.title}
                                         </BreadcrumbLink>) : (
                                             <BreadcrumbLink className={'cursor-pointer'} href={item.href}>

@@ -135,7 +135,7 @@ export function getPagination(page: number, totalPages: number, delta = 0) {
       range.push(i);
     }
   }
-  for (let i of range) {
+  for (const i of range) {
     if (l !== undefined) {
       if (i - l === 2) {
        // if the difference between current page and last page is 2, add current page + 1 to rangeWithDots

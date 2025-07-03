@@ -31,6 +31,7 @@ export default function ChatPageClient({
             href: '/chat',
         }]);
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async function fetchRooms(page:number,size:number = 9) {
         const myRooms = await getMyRooms()
         if (myRooms.success) {
@@ -48,9 +49,9 @@ export default function ChatPageClient({
             } as React.CSSProperties
         }
     >
-        <AppSidebar page={page} setPage={setPage} onPathBreadCumbs={setPathBreadcrumbs} rooms_with_page_init={roomsWithPageInit} onRoomSelect={setRoomSelectedInit} room_selected={roomSelectedInit}/>
+        <AppSidebar onPathBreadCumbsAction={setPathBreadcrumbs} rooms_with_page_init={roomsWithPageInit} onRoomSelectAction={setRoomSelectedInit} room_selected={roomSelectedInit}/>
         <SidebarInset>
-            <ChatContent page={page} setPage={setPage} onBackToSelectRoom={backToSelectRoom} onPathBreadCumbs={setPathBreadcrumbs}  rooms_with_page_init={roomsWithPageInit} onRoomSelect={setRoomSelectedInit} room_selected={roomSelectedInit} pathBreadcrumbs={pathBreadcrumbs}/>
+            <ChatContent page={page} setPageAction={setPage} onBackToSelectRoomAction={backToSelectRoom} onPathBreadCumbsAction={setPathBreadcrumbs}  rooms_with_page_init={roomsWithPageInit} onRoomSelectAction={setRoomSelectedInit} room_selected={roomSelectedInit} pathBreadcrumbs={pathBreadcrumbs}/>
         </SidebarInset>
     </SidebarProvider>
 }

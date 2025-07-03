@@ -7,19 +7,18 @@ import {getMyRooms, roomMemberMe} from "@/lib/api/room";
 import {Room} from "@/lib/interface/response/room";
 import ChatPageClient from "@/app/[locale]/(root)/chat/page-client";
 
+
 export default async function ChatPage({
-    searchParams
-                                       }:{
-    searchParams: {
-        roomId?: string,
-    };
+                                           searchParams,
+                                       }: {
+    searchParams: Promise<{ roomId?: string }>
 }) {
     const session = await auth()
     if (!session) {
         redirect('/sign-in?callbackUrl=/chat')
     }
     const t = await getTranslations()
-    const {roomId}  = await searchParams
+    const roomId = (await searchParams)?.roomId;
     const pathBreadcrumbs = [{
         title: t('ChatPage.title'),
         href: '/chat',
