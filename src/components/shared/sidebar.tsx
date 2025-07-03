@@ -23,6 +23,7 @@ import {useLocale} from "use-intl";
 import AvatarHeader from "@/components/shared/header/avatar-header";
 import {ArrayWithPage, BreadcrumbItemType} from "@/lib/type";
 import {useTranslations} from "next-intl";
+import ChatListPagination from "@/app/[locale]/(root)/chat/components/chat-list-pagination";
 
 const data = {
     user: {
@@ -52,12 +53,16 @@ export function AppSidebar({
                                onRoomSelect,
                                onPathBreadCumbs,
                                room_selected,
+                               page,
+                               setPage,
                                ...sidebarProps // chỉ chứa các prop của Sidebar
                            }: React.ComponentProps<typeof Sidebar> & {
     rooms_with_page_init: ArrayWithPage<Room>,
     onRoomSelect: (room: Room) => void,
     onPathBreadCumbs: (breadcrumbItemTypes: BreadcrumbItemType[]) => void,
     room_selected?: Room,
+    page: number,
+    setPage: (page: number) => void,
 }) {
     const [roomsWithPage, setRoomsWithPage] = useState<ArrayWithPage<Room>>(rooms_with_page_init)
     const [activeItem, setActiveItem] = useState(data.navMain[0])

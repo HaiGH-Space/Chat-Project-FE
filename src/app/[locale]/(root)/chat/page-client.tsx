@@ -23,8 +23,7 @@ export default function ChatPageClient({
     const [roomsWithPageInit, setRoomsWithPageInit] = useState<ArrayWithPage<Room>>(roomsWithPage)
     const [roomSelectedInit, setRoomSelectedInit] = useState<Room|undefined>(roomSelected);
     const [pathBreadcrumbs, setPathBreadcrumbs] = useState<BreadcrumbItemType[]>(pathBreadcrumbsInit);
-    const [page, setPage] = useState<number>(roomsWithPage.page.number);
-    console.log(page)
+    const [page, setPage] = useState<number>(roomsWithPage.page.number+1);
     function backToSelectRoom() {
         setRoomSelectedInit(undefined);
         setPathBreadcrumbs([{
@@ -49,9 +48,9 @@ export default function ChatPageClient({
             } as React.CSSProperties
         }
     >
-        <AppSidebar onPathBreadCumbs={setPathBreadcrumbs} rooms_with_page_init={roomsWithPageInit} onRoomSelect={setRoomSelectedInit} room_selected={roomSelectedInit}/>
+        <AppSidebar page={page} setPage={setPage} onPathBreadCumbs={setPathBreadcrumbs} rooms_with_page_init={roomsWithPageInit} onRoomSelect={setRoomSelectedInit} room_selected={roomSelectedInit}/>
         <SidebarInset>
-            <ChatContent onBackToSelectRoom={backToSelectRoom} onPathBreadCumbs={setPathBreadcrumbs}  rooms_with_page_init={roomsWithPageInit} onRoomSelect={setRoomSelectedInit} room_selected={roomSelectedInit} pathBreadcrumbs={pathBreadcrumbs}/>
+            <ChatContent page={page} setPage={setPage} onBackToSelectRoom={backToSelectRoom} onPathBreadCumbs={setPathBreadcrumbs}  rooms_with_page_init={roomsWithPageInit} onRoomSelect={setRoomSelectedInit} room_selected={roomSelectedInit} pathBreadcrumbs={pathBreadcrumbs}/>
         </SidebarInset>
     </SidebarProvider>
 }

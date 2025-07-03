@@ -1,11 +1,13 @@
 'use client';
 import {ChatHeaderPage} from "@/components/shared/chat/chat-header-page";
 import {ArrayWithPage, BreadcrumbItemType} from "@/lib/type";
-import {ChatBoxInput} from "@/app/[locale]/(root)/chat/chat-box";
+import {ChatBoxInput} from "@/app/[locale]/(root)/chat/components/chat-box";
 import {useTranslations} from "next-intl";
 import {Room} from "@/lib/interface/response/room";
 import {ListNavRoom} from "@/components/shared/sidebar";
 import {useLocale} from "use-intl";
+import ChatListPagination from "@/app/[locale]/(root)/chat/components/chat-list-pagination";
+import * as React from "react";
 
 
 export function ChatContent({
@@ -14,7 +16,9 @@ export function ChatContent({
                                 onPathBreadCumbs,
                                 onBackToSelectRoom,
                                 room_selected,
-                                pathBreadcrumbs
+                                pathBreadcrumbs,
+                                page,
+                                setPage
                             }: {
     rooms_with_page_init: ArrayWithPage<Room>,
     onRoomSelect: (room: Room) => void
@@ -22,6 +26,8 @@ export function ChatContent({
     onBackToSelectRoom: ()=> void,
     room_selected?: Room,
     pathBreadcrumbs: BreadcrumbItemType[],
+    page: number,
+    setPage: (page: number) => void
 
 }) {
     const locale = useLocale()
@@ -47,6 +53,7 @@ export function ChatContent({
                 onPathBreadCumbs={onPathBreadCumbs}
                 roomSelected={room_selected}
             />
+            <ChatListPagination className={'m-2'} page={page} setPage={setPage} totalPages={20}/>
         </>
     ))
 }

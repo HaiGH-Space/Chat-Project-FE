@@ -125,3 +125,31 @@ export const generateHeaderAccessToken = (session: Session) => {
     'Authorization': `Bearer ${session.accessToken}`,
   };
 }
+
+export function getPagination(page: number, totalPages: number, delta = 0) {
+  const range: number[] = [];
+  const rangeWithDots: (number)[] = [];
+  let l: number|undefined = undefined;
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= page - delta && i <= page + delta)) {
+      range.push(i);
+    }
+  }
+  for (let i of range) {
+    if (l !== undefined) {
+      if (i - l === 2) {
+       // if the difference between current page and last page is 2, add current page + 1 to rangeWithDots
+        rangeWithDots.push(l + 1);
+      } else if (i - l > 2) {
+       // if between two pages is greater than 2, add -1 to indicate "..."
+        rangeWithDots.push(-1*i);
+      }
+    }
+    // add page number to rangeWithDots
+    rangeWithDots.push(i);
+    // update l to current page number
+    l = i;
+  }
+  // return array of page numbers and -1 for "..."
+  return rangeWithDots;
+}
