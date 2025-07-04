@@ -4,8 +4,14 @@
     "en": "English",
     "zh": "Chinese"
   },
+  "HomePage": {
+    "title": "Home",
+    "goToChatPage": "Go to Chat Page"
+  },
   "ChatPage": {
+    "defaultRoomName": "Unknown Room",
     "title": "Chat",
+    "typeMessage": "Type your message here...",
     "welcomeMessage": "Welcome , {username}!"
   },
   "AboutPage": {
@@ -13,5 +19,8 @@
   },
   "Reminder": {
     "Login": "Please log in to start chatting."
+  },
+  "Error": {
+    "unauthorized": "Unauthorized access, please log in."
   }
 }

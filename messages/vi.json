@@ -4,14 +4,23 @@
     "en": "Tiếng Anh",
     "zh": "Tiếng Trung"
   },
+  "HomePage": {
+    "title": "Trang chủ",
+    "goToChatPage": "Đi đến trang trò chuyện"
+  },
   "ChatPage": {
+    "defaultRoomName": "Không rõ",
     "title": "Nhắn tin",
-    "welcomeMessage": "Chào mừng , {username}!"
+    "welcomeMessage": "Chào mừng , {username}!",
+    "typeMessage": "Nhập tin nhắn của bạn ở đây..."
   },
   "AboutPage": {
     "welcomeMessage": "Chào mừng đến với ứng dụng Explore Chat!"
   },
   "Reminder": {
     "Login": "Vui lòng đăng nhập để bắt đầu trò chuyện."
+  },
+  "Error": {
+    "unauthorized": "Bạn không có quyền truy cập."
   }
 }

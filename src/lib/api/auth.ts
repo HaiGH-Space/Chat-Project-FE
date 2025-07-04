@@ -3,7 +3,7 @@ import {callApiToObject} from "@/lib/utils";
 import {POST_METHOD} from "@/lib/constants";
 import {LoginRequest, RefreshTokenRequest, RegisterRequest} from "@/lib/interface/request/auth";
 import {LoginResponse} from "@/lib/interface/response/auth";
-import {signIn} from "@/auth";
+import {signIn, signOut} from "@/auth";
 
 const subPath = '/public/auth'
 
@@ -32,7 +32,9 @@ export async function login(data: LoginRequest) {
         body: data
     })
 }
-
+export async function logout() {
+    return signOut()
+}
 export async function refreshToken(data: RefreshTokenRequest) {
     return callApiToObject<LoginResponse>({
         url: `${subPath}/refresh-token`,

@@ -17,6 +17,23 @@ export type APIResponseError = {
     message: string;
     data: null; // Luôn null khi success = false
 };
+export type Page = {
+    number: number,// Trang hiện tại, bắt đầu từ 0
+    size: number,
+    totalElements: number,
+    totalPages: number,
+
+}
+export type ArrayWithPage<T> = {
+    content: T[]
+    page: Page
+}
+
+
 export type APIResponse<T> = APIResponseSuccess<T> | APIResponseError;
 export type SignInFormType = z.infer<ReturnType<typeof SignInFormValidator>>;
 export type SignUpFormType = z.infer<ReturnType<typeof SignUpFormValidator>>;
+export type BreadcrumbItemType = {
+    title: string;
+    href?: string;
+}
