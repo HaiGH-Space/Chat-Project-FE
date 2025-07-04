@@ -17,12 +17,12 @@ import {
 } from "@/components/ui/sidebar"
 import {NavUser} from "@/components/shared/nav-user";
 import {useState} from "react";
-import {Room} from "@/lib/interface/response/room";
 import {cn, formatDateTime} from "@/lib/utils";
 import {useLocale} from "use-intl";
 import AvatarHeader from "@/components/shared/header/avatar-header";
-import {ArrayWithPage, BreadcrumbItemType} from "@/lib/type";
+import {BreadcrumbItemType} from "@/lib/type";
 import {useTranslations} from "next-intl";
+import {useMyRoomStore} from "@/hooks/use-my-room-store";
 
 const data = {
     user: {
@@ -48,19 +48,13 @@ const data = {
 
 
 export function AppSidebar({
-                               rooms_with_page_init,
-                               onRoomSelectAction,
                                onPathBreadCumbsAction,
-                               room_selected,
                                ...sidebarProps // chỉ chứa các prop của Sidebar
                            }: React.ComponentProps<typeof Sidebar> & {
-    rooms_with_page_init: ArrayWithPage<Room>,
-    onRoomSelectAction: (room: Room) => void,
+
     onPathBreadCumbsAction: (breadcrumbItemTypes: BreadcrumbItemType[]) => void,
-    room_selected?: Room,
+
 }) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [roomsWithPage, setRoomsWithPage] = useState<ArrayWithPage<Room>>(rooms_with_page_init)
     const [activeItem, setActiveItem] = useState(data.navMain[0])
     const {setOpen} = useSidebar()
     const locale = useLocale()
@@ -134,11 +128,8 @@ export function AppSidebar({
                 </SidebarHeader>
                 {activeItem?.title === "Inbox" ? (
                     <ListNavRoom
-                        rooms={roomsWithPage.content}
                         locale={locale}
-                        onRoomSelectAction={onRoomSelectAction}
                         onPathBreadCumbsAction={onPathBreadCumbsAction}
-                        roomSelected={room_selected}
                     />
                 ) : null}
             </Sidebar>
@@ -147,18 +138,19 @@ export function AppSidebar({
 }
 
 export function ListNavRoom({
-                                rooms,
                                 locale,
-                                onRoomSelectAction,
                                 onPathBreadCumbsAction,
-                                roomSelected,
+
                             }: {
-    rooms: Room[],
     locale: string,
-    onRoomSelectAction: (room: Room) => void,
     onPathBreadCumbsAction: (breadCumbs: BreadcrumbItemType[]) => void,
-    roomSelected?: Room
 }) {
+    const {
+        rooms,
+        setRoomSelected,
+        roomSelected
+
+    } = useMyRoomStore()
     const t = useTranslations()
     const pathBreadcrumbs: BreadcrumbItemType[] = [
         {
@@ -175,7 +167,7 @@ export function ListNavRoom({
                         <div
                             onClick={
                                 () => {
-                                    onRoomSelectAction(room)
+                                    setRoomSelected(room)
                                     onPathBreadCumbsAction(
                                         [...pathBreadcrumbs, {
                                             title: room.name,

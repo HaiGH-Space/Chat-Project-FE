@@ -23,7 +23,10 @@ export default async function ChatPage({
         title: t('ChatPage.title'),
         href: '/chat',
     }]
-    const fetchMyRooms = await getMyRooms();
+    const fetchMyRooms = await getMyRooms(
+        0,
+        10
+    );
     let room_member_me
     let roomSelected: Room | undefined = undefined;
     if (roomId) {

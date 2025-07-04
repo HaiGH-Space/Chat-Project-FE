@@ -7,61 +7,63 @@ import {
 } from "@/components/ui/pagination";
 import {getPagination} from "@/lib/utils";
 import * as React from "react";
+import {useMyRoomStore} from "@/hooks/use-my-room-store";
 
 type ChatListPaginationProps = {
-    page: number;
-    setPage: (page: number) => void;
-    totalPages: number;
     className?: string;
 }
 
 
 export default function ChatListPagination(props: ChatListPaginationProps) {
-    const {page,className, setPage, totalPages} = props;
-    const pages = getPagination(page, totalPages,1);
+    const {className} = props;
+    const {
+        page,
+        setPageNumber,
+    } = useMyRoomStore()
+    const pages = getPagination(page.number, page.totalPages,1);
     const handlePreviousClick = () => {
-        if (page > 1) {
-            setPage(page - 1);
+        if (page.number > 1) {
+            setPageNumber(page.number - 1);
         }
     };
     const handleNextClick = () => {
-        if (page < totalPages) {
-            setPage(page + 1);
+        if (page.number < page.totalPages) {
+            setPageNumber(page.number + 1);
         }
     };
     const handlePageClick = (page: number) => {
-        setPage(page)
+        setPageNumber(page)
     }
     return (
         <Pagination className={className}>
             <PaginationContent>
                 <PaginationItem >
-                    <PaginationPrevious className={page ===1?'disabled:':''} onClick={handlePreviousClick}/>
+                    <PaginationPrevious className={page.number ===1?'disabled:':''} onClick={handlePreviousClick}/>
                 </PaginationItem>
-                {pages.map(page => {
-                    if (page < 1) {
+                {pages.map(pageI => {
+                    if (pageI < 1) {
                         return (
-                            <PaginationItem key={page}>
+                            <PaginationItem key={pageI}>
                                 <PaginationEllipsis/>
                             </PaginationItem>
                         )
                     } else {
                         return (
-                            <PaginationItem key={page}>
+                            <PaginationItem key={pageI}>
                                 <PaginationClick
                                     onClick={() => {
-                                        handlePageClick(page);
+                                        handlePageClick(pageI);
                                     }}
-                                    isActive={page === props.page}
+                                    isActive={pageI === page.number}
                                 >
-                                    {page}
+                                    {pageI}
                                 </PaginationClick>
                             </PaginationItem>
                         );
                     }
                 })}
                 <PaginationItem>
-                    <PaginationNext className={page ===totalPages?'disabled:':''} onClick={handleNextClick}/>
+                    <PaginationNext className={page.number ===page.totalPages?'disabled:':''} onClick={handleNextClick}/>
                 </PaginationItem>
             </PaginationContent>
         </Pagination>

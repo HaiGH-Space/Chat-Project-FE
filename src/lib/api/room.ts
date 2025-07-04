@@ -6,13 +6,13 @@ import {APIResponse, ArrayWithPage} from "@/lib/type";
 
 const subPath = '/rooms';
 
-export async function getMyRooms():Promise<APIResponse<ArrayWithPage<Room>>>{
+export async function getMyRooms(page: number,size: number):Promise<APIResponse<ArrayWithPage<Room>>>{
     const session = await auth()
     if (!session) {
         return throwSessionError()
     }
     return callApiToArrayWithPage<Room>({
-        url: `${subPath}/me`,
+        url: `${subPath}/me/page=${page}&size=${size}`,
         method: 'GET',
         headers: generateHeaderAccessToken(session)
     });

@@ -2,56 +2,60 @@
 import {AppSidebar} from "@/components/shared/sidebar";
 import {SidebarInset, SidebarProvider} from "@/components/ui/sidebar";
 import {ChatContent} from "@/app/[locale]/(root)/chat/chat-content";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Room} from "@/lib/interface/response/room";
-import {ArrayWithPage, BreadcrumbItemType} from "@/lib/type";
-import {getMyRooms} from "@/lib/api/room";
-import {toast} from "sonner";
+import {ArrayWithPage, BreadcrumbItemType, Page} from "@/lib/type";
 import {useTranslations} from "next-intl";
+import {useMyRoomStore} from "@/hooks/use-my-room-store";
 
 
 export default function ChatPageClient({
                                            roomsWithPage,
                                            pathBreadcrumbsInit,
                                            roomSelected
-                                       }:{
+                                       }: {
     roomsWithPage: ArrayWithPage<Room>,
     pathBreadcrumbsInit: BreadcrumbItemType[],
     roomSelected?: Room
 }) {
     const t = useTranslations()
-    const [roomsWithPageInit, setRoomsWithPageInit] = useState<ArrayWithPage<Room>>(roomsWithPage)
-    const [roomSelectedInit, setRoomSelectedInit] = useState<Room|undefined>(roomSelected);
     const [pathBreadcrumbs, setPathBreadcrumbs] = useState<BreadcrumbItemType[]>(pathBreadcrumbsInit);
-    const [page, setPage] = useState<number>(roomsWithPage.page.number+1);
+    const {
+        setPage,
+        setRooms,
+        setRoomSelected
+    } = useMyRoomStore()
+
+
+    useEffect(() => {
+        const page: Page = roomsWithPage.page
+        const rooms: Room[] = roomsWithPage.content
+        setPage(page)
+        setRooms(rooms)
+        setRoomSelected(roomSelected)
+    }, [roomsWithPage, roomSelected, setPage, setRooms, setRoomSelected]);
+
     function backToSelectRoom() {
-        setRoomSelectedInit(undefined);
+        setRoomSelected(undefined);
         setPathBreadcrumbs([{
             title: t('ChatPage.title'),
             href: '/chat',
         }]);
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async function fetchRooms(page:number,size:number = 9) {
-        const myRooms = await getMyRooms()
-        if (myRooms.success) {
-            setRoomsWithPageInit(myRooms.data)
-            setPage(myRooms.data.page.number)
-        }else {
-            toast.error(myRooms.message)
-        }
-    }
 
-   return <SidebarProvider
+    return <SidebarProvider
         style={
             {
                 "--sidebar-width": "355px",
             } as React.CSSProperties
         }
     >
-        <AppSidebar onPathBreadCumbsAction={setPathBreadcrumbs} rooms_with_page_init={roomsWithPageInit} onRoomSelectAction={setRoomSelectedInit} room_selected={roomSelectedInit}/>
+        <AppSidebar onPathBreadCumbsAction={setPathBreadcrumbs}
+        />
         <SidebarInset>
-            <ChatContent page={page} setPageAction={setPage} onBackToSelectRoomAction={backToSelectRoom} onPathBreadCumbsAction={setPathBreadcrumbs}  rooms_with_page_init={roomsWithPageInit} onRoomSelectAction={setRoomSelectedInit} room_selected={roomSelectedInit} pathBreadcrumbs={pathBreadcrumbs}/>
+            <ChatContent onBackToSelectRoomAction={backToSelectRoom}
+                         onPathBreadCumbsAction={setPathBreadcrumbs}
+                         pathBreadcrumbs={pathBreadcrumbs}/>
         </SidebarInset>
     </SidebarProvider>
 }
